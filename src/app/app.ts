@@ -1,22 +1,11 @@
-import { Component } from '@angular/core'
+import { Component, computed, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
+import { PromptList } from "./prompts/prompt-list/prompt-list";
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
-  imports: [FormsModule]
+  imports: [FormsModule, PromptList]
 })
 export class App {
-count = 10
-constructor(){
-  setTimeout(() => {
-    this.count = 20
-  }, 2000)
-}
-
-onClick(){
-  console.log('clicked')
-}
-
-
 }
