@@ -1,19 +1,28 @@
 <p-card>
-  <form>
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="field">
       <label for="title">Title</label>
-      <input id="title" type="text" pInputText class="w-full" />
+      <input formControlName="title" id="title" type="text" pInputText class="w-full" />
+      <small class="invalid-feedback">The title is required (max 30 characters)</small>
     </div>
     <div class="field">
       <label for="content">Content</label>
-      <textarea id="content" pTextarea class="w-full"></textarea>
+      <textarea formControlName="content" id="content" pTextarea class="w-full"></textarea>
+      <small class="invalid-feedback">The content is required (min 10 characters)</small>
     </div>
     <div class="field">
       <label for="category">Category</label>
-      <p-select inputId="category" class="w-full"
+      <p-select
+        formControlName="categoryId"
+        inputId="category" class="w-full"
         optionValue="id"
         optionLabel="name"
         [options]="categories()"></p-select>
+        <small class="invalid-feedback">The category is required</small>
+      <div class="flex justify-content-end mt-2 gap-2">
+        <p-button routerLink="/" label="annuler" severity="secondary" />
+        <p-button label="Créer" type="submit" />
+      </div>
     </div>
   </form>
 </p-card>

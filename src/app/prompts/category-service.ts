@@ -13,4 +13,5 @@ export class CategoryService {
   getCategory(){
     return this.HttpClient.get<Category[]>(this.baseUrl);
   }
+
 }

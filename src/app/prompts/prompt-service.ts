@@ -14,4 +14,9 @@ export class PromptService {
   getPrompts(){
     return this.HttpClient.get<Prompt[]>(this.baseUrl);
   }
+
+  createCategory(prompt: {title: string,content: string, categoryId: number}){
+    return this.HttpClient.post<Prompt>(this.baseUrl, prompt);
+  }
+
 }
