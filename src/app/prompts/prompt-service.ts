@@ -15,8 +15,16 @@ export class PromptService {
     return this.HttpClient.get<Prompt[]>(this.baseUrl);
   }
 
+  getPrompt(promptId: number){
+    return this.HttpClient.get<Prompt>(`${this.baseUrl}/${promptId}`);
+  }
+
   createCategory(prompt: {title: string,content: string, categoryId: number}){
     return this.HttpClient.post<Prompt>(this.baseUrl, prompt);
+  }
+
+  updatePrompt(promptId: number, prompt: {title: string, content: string, categoryId: number}){
+    return this.HttpClient.put<Prompt>(`${this.baseUrl}/${promptId}`, prompt);
   }
 
 }

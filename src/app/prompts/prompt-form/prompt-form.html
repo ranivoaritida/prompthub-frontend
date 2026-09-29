@@ -7,7 +7,7 @@
     </div>
     <div class="field">
       <label for="content">Content</label>
-      <textarea formControlName="content" id="content" pTextarea class="w-full"></textarea>
+      <textarea formControlName="content" id="content" rows="8" pTextarea class="w-full"></textarea>
       <small class="invalid-feedback">The content is required (min 10 characters)</small>
     </div>
     <div class="field">
@@ -21,7 +21,7 @@
         <small class="invalid-feedback">The category is required</small>
       <div class="flex justify-content-end mt-2 gap-2">
         <p-button routerLink="/" label="annuler" severity="secondary" />
-        <p-button label="Créer" type="submit" />
+        <p-button [label]="promptId() ? 'Modifier' : 'Créer'" type="submit" />
       </div>
     </div>
   </form>

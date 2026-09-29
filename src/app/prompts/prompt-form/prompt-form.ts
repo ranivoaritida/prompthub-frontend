@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core'
+import { Component, effect, inject, input } from '@angular/core'
 import { Card } from 'primeng/card';
 import { Textarea } from 'primeng/textarea';
 import { Select } from 'primeng/select';
@@ -17,10 +17,11 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './prompt-form.scss',
 })
 export class PromptForm {
-
   router = inject(Router);
   categoryService = inject(CategoryService);
   promptService = inject(PromptService);
+
+  promptId = input<number>();
 
   categories = toSignal(this.categoryService.getCategory());
 
@@ -31,6 +32,21 @@ export class PromptForm {
 
   })
 
+  constructor(){
+    effect(() => {
+      console.log('PromptId', this.promptId());
+      const promptId = this.promptId();
+      if(promptId){
+        this.promptService.getPrompt(promptId).subscribe( prompt => {
+          this.form.patchValue({
+            title: prompt.title,
+            content: prompt.content,
+            categoryId: prompt.category.id
+          })
+        })
+      }
+    })
+  }
   submit(){
 
     if(this.form.invalid){
@@ -38,10 +54,18 @@ export class PromptForm {
       return;
     }
 
-    console.log(this.form.value)
     const prompt = this.form.getRawValue();
-    this.promptService.createCategory(prompt).subscribe(() =>{
+    const promptId = this.promptId();
+
+    if(promptId){
+      this.promptService.updatePrompt(promptId, prompt).subscribe(() =>{
       this.router.navigate(['/'])
     })
+    }else{
+      console.log(this.form.value)
+      this.promptService.createCategory(prompt).subscribe(() =>{
+      this.router.navigate(['/'])
+    })
+    }
   }
 }
