@@ -27,4 +27,8 @@ export class PromptService {
     return this.HttpClient.put<Prompt>(`${this.baseUrl}/${promptId}`, prompt);
   }
 
+  promptDelete(promptId: number){
+    return this.HttpClient.delete(`${this.baseUrl}/${promptId}`);
+  }
+
 }

@@ -68,4 +68,10 @@ export class PromptForm {
     })
     }
   }
+
+  deletePrompt(){
+    this.promptService.promptDelete(this.promptId()!).subscribe(() => {
+      this.router.navigate(['/'])
+    })
+  }
 }

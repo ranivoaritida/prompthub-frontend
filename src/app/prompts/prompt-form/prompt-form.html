@@ -20,6 +20,9 @@
         [options]="categories()"></p-select>
         <small class="invalid-feedback">The category is required</small>
       <div class="flex justify-content-end mt-2 gap-2">
+        @if(promptId()){
+          <p-button class="mr-auto" [outlined]="true" label="Supprimer" severity="danger" (onClick)="deletePrompt()" />
+        }
         <p-button routerLink="/" label="annuler" severity="secondary" />
         <p-button [label]="promptId() ? 'Modifier' : 'Créer'" type="submit" />
       </div>
